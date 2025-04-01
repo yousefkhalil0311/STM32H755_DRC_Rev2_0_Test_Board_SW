@@ -1,0 +1,92 @@
+2025-04-01 00:06:28,279 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2025-04-01 00:06:31,096 [INFO] ProjectBuilder:5191 - Time for Generating toolchain IDE Files: 3395mS.
+2025-04-01 00:06:31,096 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-04-01 00:06:31,097 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-04-01 00:08:49,326 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:08:49,540 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:08:49,696 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:08:49,842 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:08:49,981 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:08:50,155 [INFO] Gpio:277 - dependency for GPIO [DEBUG, I2C2, RCC, SPI1, SPI2, USART1, USB_OTG_FS]
+2025-04-01 00:09:04,670 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 728392480 Bytes (1050673152)
+2025-04-01 00:09:05,985 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 761946912 Bytes (1050673152)
+2025-04-01 00:09:07,601 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 929196832 Bytes (1050673152)
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SPI
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SPI
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: I2C
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USART
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: USB_OTG_FS
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: CORTEX_M7
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC2
+2025-04-01 00:09:08,158 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: DEBUG
+2025-04-01 00:09:08,159 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-04-01 00:09:08,159 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS_M4
+2025-04-01 00:09:08,159 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC1
+2025-04-01 00:09:08,159 [INFO] CodeGenerator:882 - code generatio: config db path: C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.14.0.202502271554\\db\
+2025-04-01 00:09:08,204 [INFO] CodeGenerator:1609 - *******************Project context M7 selected
+2025-04-01 00:09:08,410 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\MXTmpFiles\license.tmp_save
+2025-04-01 00:09:08,493 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\MXTmpFiles\license.tmp
+2025-04-01 00:09:08,584 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\gpio.tmp_save
+2025-04-01 00:09:08,634 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\gpio.tmp
+2025-04-01 00:09:08,717 [WARN] IPConfigManager:103 - WARNING: Missing Config File for DEBUG ip!!
+2025-04-01 00:09:08,911 [WARN] IPConfigManager:103 - WARNING: Missing Config File for NVIC1 ip!!
+2025-04-01 00:09:09,421 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\cortex.tmp_save
+2025-04-01 00:09:09,464 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\cortex.tmp
+2025-04-01 00:09:09,478 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\stm32h7xx_it.c_save
+2025-04-01 00:09:09,520 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\stm32h7xx_it.c
+2025-04-01 00:09:09,524 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\stm32h7xx_it.h_save
+2025-04-01 00:09:09,559 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\stm32h7xx_it.h
+2025-04-01 00:09:09,725 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\stm32h7xx_hal_msp.c_save
+2025-04-01 00:09:09,789 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\stm32h7xx_hal_msp.c
+2025-04-01 00:09:09,792 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\system.tmp_save
+2025-04-01 00:09:09,825 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\MXTmpFiles\system.tmp
+2025-04-01 00:09:09,835 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\stm32h7xx_hal_conf.h_save
+2025-04-01 00:09:09,876 [INFO] CodeEngine:343 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\stm32h7xx_hal_conf.h
+2025-04-01 00:09:09,894 [WARN] IPConfigManager:3747 - IP not found : NVIC
+2025-04-01 00:09:09,895 [WARN] IPConfigManager:3747 - IP not found : USB_OTG
+2025-04-01 00:09:09,895 [WARN] CodeGenerator:4198 - IP not found : null
+2025-04-01 00:09:09,895 [WARN] CodeGenerator:4198 - IP not found : null
+2025-04-01 00:09:09,901 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\main.h_save
+2025-04-01 00:09:09,936 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Inc\main.h
+2025-04-01 00:09:09,940 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\main.c_save
+2025-04-01 00:09:10,033 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\Core\Src\main.c
+2025-04-01 00:09:10,075 [INFO] CodeGenerator:1609 - *******************Project context M4 selected
+2025-04-01 00:09:10,125 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\MXTmpFiles\license.tmp_save
+2025-04-01 00:09:10,171 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\MXTmpFiles\license.tmp
+2025-04-01 00:09:10,174 [WARN] IPConfigManager:103 - WARNING: Missing Config File for NVIC2 ip!!
+2025-04-01 00:09:10,183 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\MXTmpFiles\cortex.tmp_save
+2025-04-01 00:09:10,215 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\MXTmpFiles\cortex.tmp
+2025-04-01 00:09:10,224 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\stm32h7xx_it.c_save
+2025-04-01 00:09:10,261 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\stm32h7xx_it.c
+2025-04-01 00:09:10,264 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\stm32h7xx_it.h_save
+2025-04-01 00:09:10,301 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\stm32h7xx_it.h
+2025-04-01 00:09:10,320 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\stm32h7xx_hal_msp.c_save
+2025-04-01 00:09:10,368 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\stm32h7xx_hal_msp.c
+2025-04-01 00:09:10,371 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\MXTmpFiles\system.tmp_save
+2025-04-01 00:09:10,405 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\MXTmpFiles\system.tmp
+2025-04-01 00:09:10,412 [INFO] CodeEngine:319 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\stm32h7xx_hal_conf.h_save
+2025-04-01 00:09:10,448 [INFO] CodeEngine:343 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\stm32h7xx_hal_conf.h
+2025-04-01 00:09:10,456 [WARN] IPConfigManager:3747 - IP not found : NVIC
+2025-04-01 00:09:10,456 [WARN] CodeGenerator:4198 - IP not found : null
+2025-04-01 00:09:10,460 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\main.h_save
+2025-04-01 00:09:10,496 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Inc\main.h
+2025-04-01 00:09:10,500 [INFO] CodeEngine:263 - oldGeneratedFile, C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\main.c_save
+2025-04-01 00:09:10,544 [INFO] CodeEngine:287 - Generated code: C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM4\Core\Src\main.c
+2025-04-01 00:09:10,762 [INFO] ProjectBuilder:3324 - Time for Copy HAL[1] : 115mS.
+2025-04-01 00:09:10,769 [INFO] ProjectBuilder:4912 - Project Generator version: 4.6.0-B36
+2025-04-01 00:09:10,826 [INFO] ConfigFileManager:1590 - The Die is : DIE450
+2025-04-01 00:09:14,165 [INFO] ProjectBuilder:5191 - Time for Generating toolchain IDE Files: 3396mS.
+2025-04-01 00:09:14,166 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 1mS.
+2025-04-01 00:09:14,166 [INFO] ProjectBuilder:3181 - Time for Copy CMSIS : 0mS.
+2025-04-01 00:25:38,419 [INFO] WebApp:194 - Connection lost
+2025-04-01 00:25:38,630 [INFO] WebApp:191 - Connection restablished
+2025-04-01 03:30:03,438 [INFO] WebApp:194 - Connection lost
+2025-04-01 03:30:03,693 [INFO] WebApp:191 - Connection restablished
+2025-04-01 03:41:54,427 [INFO] WebApp:194 - Connection lost
+2025-04-01 03:41:54,712 [INFO] WebApp:191 - Connection restablished
+2025-04-01 03:43:55,408 [INFO] WebApp:194 - Connection lost
+2025-04-01 03:43:55,605 [INFO] WebApp:191 - Connection restablished
+2025-04-01 06:38:36,161 [INFO] WebApp:194 - Connection lost
+2025-04-01 06:38:41,900 [INFO] WebApp:191 - Connection restablished
