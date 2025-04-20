@@ -1,0 +1,34 @@
+# Ignore build outputs
+/DRC_Rev2_0_DVT_Interposer_Controller/CM4/Debug/
+/DRC_Rev2_0_DVT_Interposer_Controller/CM4/Release/
+
+/DRC_Rev2_0_DVT_Interposer_Controller/CM7/Debug/
+/DRC_Rev2_0_DVT_Interposer_Controller/CM7/Release/
+*.o
+*.d
+*.elf
+*.hex
+*.bin
+*.list
+*.map
+
+# Ignore IDE metadata
+/DRC_Rev2_0_DVT_Interposer_Controller/.settings/
+/DRC_Rev2_0_DVT_Interposer_Controller/.project
+
+#ignore CM4 metadata
+/DRC_Rev2_0_DVT_Interposer_Controller/CM4/.settings/
+/DRC_Rev2_0_DVT_Interposer_Controller/CM4/.cproject/
+DRC_Rev2_0_DVT_Interposer_Controller/CM4/.project
+
+#ignore CM7 metadata
+/DRC_Rev2_0_DVT_Interposer_Controller/CM7/.settings/
+/DRC_Rev2_0_DVT_Interposer_Controller/CM7/.cproject/
+DRC_Rev2_0_DVT_Interposer_Controller/CM7/.project
+
+# STM32CubeMX backup files
+*.bak
+
+# Ignore personal IDE configurations
+*.launch
+*.log
