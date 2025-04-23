@@ -13,6 +13,7 @@
 *.map
 
 # Ignore IDE metadata
+/.metadata/
 /DRC_Rev2_0_DVT_Interposer_Controller/.settings/
 /DRC_Rev2_0_DVT_Interposer_Controller/.project
 

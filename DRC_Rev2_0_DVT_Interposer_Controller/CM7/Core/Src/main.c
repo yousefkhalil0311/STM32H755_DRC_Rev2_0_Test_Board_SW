@@ -411,7 +411,7 @@ path_t* LSDACSequenceArray[] = {
 		&J3_46
 };
 
-//path_t instance, LSDAC Number, LSDAC Channel, PIN Number
+//LSDAC Number, LSDAC Channel, PIN Number
 int LSDACSequenceArrayInfo[][3] = {
 		{0, 0, 36},
 		{0, 4, 35},
@@ -687,8 +687,8 @@ uint16_t SPIIOEXP_Poll(SPIIOEXP_t* SPIEXP){
 
 	//Receive Port A and B data into readWords array
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi2, spiWords, 2, 1);
-	HAL_SPI_Receive(&hspi2, readWords, 2, 1);
+	HAL_SPI_Transmit(&hspi2, spiWords, 2, 100);
+	HAL_SPI_Receive(&hspi2, readWords, 2, 100);
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_SET);
 
 	//combine 2 read bytes into single 16 bit value
