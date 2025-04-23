@@ -60,6 +60,16 @@ typedef struct {
 	bool			state;		//current state of the pin
 } SPIIOXPin_t;
 
+typedef struct {
+	SPIIOXPin_t* 	SPDTpin;   //SPDT pin needed to be controlled to set path
+	bool			SPDTState; //state in which SPDTpin will set path
+	SPIIOXPin_t*	SP8TA2;   //SP8T pin needed to be controlled to set path
+	SPIIOXPin_t*	SP8TA1;   //SP8T pin needed to be controlled to set path
+	SPIIOXPin_t*	SP8TA0;   //SP8T pin needed to be controlled to set path
+	uint8_t			SP8TState; //state in which SP8Tpin will set path. last 3 bits -> A2, A1, A0
+	SPIIOXPin_t*	SP8TEN;   //SP8T pin needed to be controlled to set path
+} path_t;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -323,8 +333,8 @@ SPIIOXPin_t SPIPIN0  = {0},
 			SPIPIN_SEL32  = {2, &SPIEXP5, 1 << 3},
 			SPIPIN_SEL3   = {2, &SPIEXP5, 1 << 4},
 			SPIPIN_SEL2   = {2, &SPIEXP5, 1 << 5},
-			SPIPIN_SPDTEN = {2, &SPIEXP5, 1 << 6},
-			SPIPIN_SPDTEN2 = {2, &SPIEXP4, 1 << 6},
+			//SPIPIN_SPDTEN = {2, &SPIEXP5, 1 << 6},
+			//SPIPIN_SPDTEN2 = {2, &SPIEXP4, 1 << 6},
 			SPIPIN_SEL10  = {2, &SPIEXP5, 1 << 9},
 			SPIPIN_SEL36  = {2, &SPIEXP5, 1 << 10},
 			SPIPIN_SEL35  = {2, &SPIEXP5, 1 << 11},
@@ -355,6 +365,72 @@ SPIIOXPin_t* SPIPins[91] = {
 		&SPIPIN71, &SPIPIN72, &SPIPIN73, &SPIPIN74, &SPIPIN75, &SPIPIN76, &SPIPIN77, &SPIPIN78, &SPIPIN79, &SPIPIN80,
 		&SPIPIN81, &SPIPIN82, &SPIPIN83, &SPIPIN84, &SPIPIN85, &SPIPIN86, &SPIPIN87, &SPIPIN88, &SPIPIN89, &SPIPIN90
 };
+
+path_t	J2_32 = {&SPIPIN_SEL32, 1, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B000, &SPIPIN_nMEN0},
+		J2_3  = {&SPIPIN_SEL3,  0, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B001, &SPIPIN_nMEN0},
+		J2_34 = {&SPIPIN_SEL34, 1, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B010, &SPIPIN_nMEN0},
+		J2_2  = {&SPIPIN_SEL2,  1, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B011, &SPIPIN_nMEN0},
+		J2_33 = {&SPIPIN_SEL33, 0, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B100, &SPIPIN_nMEN0},
+		J2_36 = {&SPIPIN_SEL36, 0, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B101, &SPIPIN_nMEN0},
+		J2_6  = {&SPIPIN_SEL6,  1, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B110, &SPIPIN_nMEN0},
+		J2_35 = {&SPIPIN_SEL35, 1, &SPIPIN_MDAC0_A2, &SPIPIN_MDAC0_A1, &SPIPIN_MDAC0_A0, 0B111, &SPIPIN_nMEN0},
+		J3_40 = {&SPIPIN_SEL40, 1, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B000, &SPIPIN_nMEN1},
+		J3_74 = {&SPIPIN_SEL74, 0, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B001, &SPIPIN_nMEN1},
+		J3_46 = {&SPIPIN_SEL46, 1, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B010, &SPIPIN_nMEN1},
+		J3_10 = {&SPIPIN_SEL10, 1, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B011, &SPIPIN_nMEN1},
+		J3_17 = {&SPIPIN_SEL17, 1, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B100, &SPIPIN_nMEN1},
+		J3_51 = {&SPIPIN_SEL51, 0, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B101, &SPIPIN_nMEN1},
+		J3_48 = {&SPIPIN_SEL48, 0, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B110, &SPIPIN_nMEN1},
+		J3_21 = {&SPIPIN_SEL21, 1, &SPIPIN_MDAC1_A2, &SPIPIN_MDAC1_A1, &SPIPIN_MDAC1_A0, 0B111, &SPIPIN_nMEN1},
+		J4_46 = {&SPIPIN_SEL46, 1, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B000, &SPIPIN_nMEN2},
+		J4_17 = {&SPIPIN_SEL17, 1, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B001, &SPIPIN_nMEN2},
+		J4_48 = {&SPIPIN_SEL48, 0, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B010, &SPIPIN_nMEN2},
+		J4_33 = {&SPIPIN_SEL33, 0, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B011, &SPIPIN_nMEN2},
+		J4_50 = {&SPIPIN_SEL50, 1, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B100, &SPIPIN_nMEN2},
+		J4_55 = {&SPIPIN_SEL55, 1, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B101, &SPIPIN_nMEN2},
+		J4_51 = {&SPIPIN_SEL51, 0, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B110, &SPIPIN_nMEN2},
+		J4_21 = {&SPIPIN_SEL21, 1, &SPIPIN_MADC_A2, &SPIPIN_MADC_A1, &SPIPIN_MADC_A0, 0B111, &SPIPIN_nMEN2};
+
+//path_t instance, LSDAC Number, LSDAC Channel, PIN Number
+path_t* LSDACSequenceArray[] = {
+		&J2_36,
+		&J2_35,
+		&J2_34,
+		&J2_6,
+		&J2_3,
+		&J2_2,
+		&J2_32,
+		&J2_33,
+		&J3_10,
+		&J3_40,
+		&J3_74,
+		&J3_17,
+		&J3_48,
+		&J3_21,
+		&J3_51,
+		&J3_46
+};
+
+//path_t instance, LSDAC Number, LSDAC Channel, PIN Number
+int LSDACSequenceArrayInfo[][3] = {
+		{0, 0, 36},
+		{0, 4, 35},
+		{0, 5, 34},
+		{0, 6, 6},
+		{0, 7, 3},
+		{1, 4, 2},
+		{1, 5, 32},
+		{1, 6, 33},
+		{0, 1, 10},
+		{0, 2, 40},
+		{0, 3, 74},
+		{1, 0, 17},
+		{1, 1, 48},
+		{1, 2, 21},
+		{1, 3, 51},
+		{1, 7, 46}
+};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -374,9 +450,7 @@ int  pin_Read(const Pin_t* pin);
 void IOEXP_Init(IOEXP_t* IOX);
 void IOEXP_SetModes(IOEXP_t* IOX, uint32_t pinMask, int mode);
 void IOEXP_SetPins(IOEXP_t* IOX, uint32_t pinMask, int state);
-//int IOEXP_ReadAll(IOEXP_t* IOX);
-//uint8_t IOEXP_ReadPort(IOEXP_t* IOX, int port);
-//bool IOEXP_ReadPin(IOEXP_t* IOX, int pin);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -388,6 +462,7 @@ Pin control functions Start
 
 *//////////////////////////////////////////////////////////////////////////////
 
+//Initializes pin by setting to analog function if has one
 void pin_Init(const Pin_t* pin){
 	if (pin->isPin > 1){
 		IOEXP_SetModes(&IOEXP_SPDT, pin->IOX_SPDT_Pin, PIN_INPUT);
@@ -398,6 +473,7 @@ void pin_Init(const Pin_t* pin){
 	}
 	return;
 }
+
 
 void pin_SetMode(const Pin_t* pin, int mode){
 	GPIO_InitTypeDef initStruct = {0};
@@ -530,8 +606,13 @@ void IOEXP_SetPins(IOEXP_t* IOX, uint32_t pinMask, int state){
 	return;
 }
 
+//Initializes SPI IO Expanders in the DVT Interposer
 void SPIIOEXP_Init(SPIIOEXP_t* SPIEXP){
-	uint8_t spiWords[] = {0x40, 0x00, 0xFF, 0xFF}; //Device OPCODE -> 0x40, All port A pins to inputs, all port B pins to inputs
+
+	//Device OPCODE -> 0x40, All port A pins to inputs, all port B pins to inputs
+	uint8_t spiWords[] = {0x40, 0x00, 0xFF, 0xFF};
+
+	//Set up IO Expander
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_RESET);
 	HAL_SPI_Transmit(SPIEXP->handle, spiWords, 4, 100);
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_SET);
@@ -558,6 +639,7 @@ void SPIIOEXP_SetModes(SPIIOEXP_t* SPIEXP, uint16_t mask, uint16_t mode){
 	return;
 }
 
+//Sets mode of single SPI IO Expander pin. 1 -> Input; 0 -> Output
 void SPIIOEXP_SetMode(SPIIOXPin_t* SPIPin, bool mode){
 
 	uint16_t mode_16bits = mode ? 0xFFFF : 0x0000;
@@ -566,6 +648,7 @@ void SPIIOEXP_SetMode(SPIIOXPin_t* SPIPin, bool mode){
 
 }
 
+//Writes a value(state) to IO expander pins covered by the mask
 void SPIIOEXP_WritePins(SPIIOEXP_t* SPIEXP, uint16_t mask, uint16_t state){
 
 	uint8_t currentPortA_State = (SPIEXP->state >> 8) & 0xFF;
@@ -585,29 +668,15 @@ void SPIIOEXP_WritePins(SPIIOEXP_t* SPIEXP, uint16_t mask, uint16_t state){
 	return;
 }
 
+//Sets a single IO expander pin
 void SPIIOEXP_SetPin(SPIIOXPin_t* SPIPin, bool state){
 
 	uint16_t state_16bits = state ? 0xFFFF : 0x0000;
 
 	SPIIOEXP_WritePins(SPIPin->IOEXP, SPIPin->Pin, state_16bits);
 
-}
+	SPIPin->state = state;
 
-//Polls all 16 pins of IO expander and saves state into IOEXP struct object. Returns state of specified pin of IO expander
-bool SPIIOEXP_readPin(SPIIOEXP_t* SPIEXP, SPIIOXPin_t* SPIPin){
-
-	uint8_t readWords[2];
-
-	//Receive Port A and B data into readWords array
-	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_RESET);
-	HAL_SPI_Receive(&hspi2, readWords, 2, 100);
-	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_SET);
-
-	SPIEXP->state = (readWords[0] << 8) | readWords[1];								//combine 2 read bytes into single 16 bit value
-
-	SPIPin->state = SPIEXP->state & SPIPin->Pin;
-
-	return SPIPin->state;
 }
 
 //Polls all 16 pins of IO expander and saves state into IOEXP struct object. Returns state
@@ -618,15 +687,29 @@ uint16_t SPIIOEXP_Poll(SPIIOEXP_t* SPIEXP){
 
 	//Receive Port A and B data into readWords array
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi2, spiWords, 2, 100);
-	HAL_SPI_Receive(&hspi2, readWords, 2, 100);
+	HAL_SPI_Transmit(&hspi2, spiWords, 2, 1);
+	HAL_SPI_Receive(&hspi2, readWords, 2, 1);
 	HAL_GPIO_WritePin(SPIEXP->cs_port, SPIEXP->cs_pin, GPIO_PIN_SET);
 
-	SPIEXP->state = (readWords[0] << 8) | readWords[1];								//combine 2 read bytes into single 16 bit value
+	//combine 2 read bytes into single 16 bit value
+	SPIEXP->state = (readWords[0] << 8) | readWords[1];
 
 	return SPIEXP->state;
 }
 
+//Polls all 16 pins of IO expander and saves state into IOEXP struct object. Returns state of specified pin of IO expander
+bool SPIIOEXP_readPin(SPIIOEXP_t* SPIEXP, SPIIOXPin_t* SPIPin){
+
+	//poll the SPI IO Expander
+	SPIEXP->state = SPIIOEXP_Poll(SPIEXP);
+
+	//Store read state of the pin
+	SPIPin->state = SPIEXP->state & SPIPin->Pin;
+
+	return SPIPin->state;
+}
+
+//Gets pin state from polled IO expander polled data and stores into SPIPin->state
 bool SPIIOEXP_getPinState(SPIIOXPin_t* SPIPin){
 
 	SPIPin->state = SPIPin->IOEXP->state & SPIPin->Pin;
@@ -635,36 +718,209 @@ bool SPIIOEXP_getPinState(SPIIOXPin_t* SPIPin){
 }
 
 
-
-
-
-/*
-int IOEXP_ReadAll(IOEXP_t* IOX){
-	uint8_t tempBuff[3];
-	HAL_I2C_Master_Transmit(IOX->handle, IOX->address << 1, IOEXP_ReadAcc_CMD, 1, 50);
-	HAL_I2C_Master_Receive(IOX->handle, (IOX->address << 1) | 1, tempBuff, 3, 50);
-	return (tempBuff[0] << 16) | (tempBuff[1] << 8) | tempbuff[2];
-}
-
-uint8_t IOEXP_ReadPort(IOEXP_t* IOX, int port){
-	uint8_t tempBuff[1];
-	HAL_I2C_Master_Transmit(IOX->handle, IOX->address << 1, port, 1, 50);
-	HAL_I2C_Masrer_Receive(IOX->handle, (IOX->address << 1) | 1, tempBuff, 1, 50);
-	return tempBuff[1];
-}
-
-bool IOEXP_ReadPin(IOEXP_t* IOX, int pin){
-	uint8_t port_data = IOEXP_ReadPort(IOX, pin/10);
-	return (port_data >> (pin%10)) & 1;
-}
-*/
-
-
 /*/////////////////////////////////////////////////////////////////////////////
 
 IO expander functions End
 
 *//////////////////////////////////////////////////////////////////////////////
+
+
+/*
+Other functions
+ */
+
+typedef enum {
+	BLACK = 30,
+	RED = 31,
+	GREEN = 32,
+	YELLOW = 33,
+	BLUE = 34,
+	MAGENTA = 35,
+	CYAN = 36,
+	WHITE = 37,
+	DEFAULT = 39
+} TerminalTextColor;
+
+
+//clears Terminal Screen
+void clearTerminal(){
+
+	//ascii clear and home command
+	char clearCommand[] = "\033[2J\033[H";
+
+	HAL_UART_Transmit(&huart1, (uint8_t *)clearCommand, strlen(clearCommand), 100);
+
+}
+
+//clear serial buffer
+void clearBuffer(){
+	int d;
+	while((d = getchar()) != '\n' && d != EOF && d != '\r');
+	return;
+}
+
+//sets text color of terminal. Affect text printed after setting color
+void setTextColor(TerminalTextColor color){
+
+	//stores color command
+	char colorCommand[10];
+
+	sprintf(colorCommand, "\033[%dm", color);
+
+	HAL_UART_Transmit(&huart1, (uint8_t *)colorCommand, strlen(colorCommand), 10);
+
+}
+
+//sets Terminal Cursor Position. Origin is top left of screen. Coordinates are distance from origin
+void setCursorPosition(int x, int y){
+
+	//stores position command
+	char posCommand[10];
+
+	sprintf(posCommand, "\033[%d;%dH", y, x);
+
+	HAL_UART_Transmit(&huart1, (uint8_t *)posCommand, strlen(posCommand), 10);
+
+}
+
+//Header to display some info about what the device and firmware are for
+void displayHeader(){
+	const char* headerStrings[] = {
+			"DRC Rev. 2.0 Device Verification Test.\n\r",
+			"Device: STM32H755ZIT6 Test Board.\n\r",
+			"Press escape to return to menu.\n\n\r"
+	};
+
+	for(int i = 0; i < sizeof(headerStrings)/sizeof(headerStrings[0]); i++){
+		HAL_UART_Transmit(&huart1, (uint8_t *)headerStrings[i], strlen(headerStrings[i]), 10);
+	}
+}
+
+
+//Prints the state of an IO pin in its corresponding terminal output location
+void displayPinState(uint8_t pinNum, uint8_t state){
+
+	//stores message to transmit
+	char transmitMsg[20];
+
+	sprintf(transmitMsg, "Pin %d: %d\n", pinNum, state);
+
+	setTextColor(state ? GREEN : WHITE);
+
+	setCursorPosition(30 * (pinNum/30), 8 + pinNum%30);
+
+	HAL_UART_Transmit(&huart1, (uint8_t *)transmitMsg, strlen(transmitMsg), 10);
+
+	//Reset terminal text color when exiting
+	setTextColor(DEFAULT);
+	return;
+}
+
+
+//Prints whether a LSDAC channel is connected to J2 or J3 in its corresponding terminal output location
+void displayLSDACConnections(uint8_t J2Active, uint8_t J3Active){
+
+	//stores message to transmit
+	char transmitMsg[30];
+
+	for(int i = 0; i < 16; i++){
+
+		int LSDACNum = LSDACSequenceArrayInfo[i][0];
+
+		int LSDACCH = LSDACSequenceArrayInfo[i][1];
+
+		int pinNum = LSDACSequenceArrayInfo[i][2];
+
+		sprintf(transmitMsg, "LSDAC%d CH%d: PIN%d\n", LSDACNum, LSDACCH, pinNum);
+
+		if(J2Active == i || J3Active == i){
+			setTextColor(GREEN);
+		}
+		else{
+			setTextColor(DEFAULT);
+		}
+
+		setCursorPosition(30 * (i/8), 13 + i%8);
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)transmitMsg, strlen(transmitMsg), 10);
+
+	}
+
+	//Reset terminal text color when exiting
+	setTextColor(DEFAULT);
+	return;
+}
+
+//Callback function for UART receive interrupt
+uint8_t keyPressed_byte;
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	if(huart->Instance == USART1){
+		HAL_UART_Receive_IT(&huart1, &keyPressed_byte, 1);
+	}
+}
+
+//function used within test cases to loop a function until escape character is received.
+void runTest(void (*testFunction)()){
+
+	//reset keyPressed_byte in case junk left inside it
+	keyPressed_byte = 0;
+
+	//while escape is not pressed
+	while(keyPressed_byte != '\e'){
+
+		if(testFunction == NULL){
+
+			HAL_Delay(10);
+
+		}else{
+
+			//run entered test
+			testFunction();
+
+		}
+
+	}
+
+}
+
+//sets an analog path, connecting a pin to J2, J3, or J4 depending on params
+void setPath(path_t *path){
+	SPIIOEXP_SetPin(path->SPDTpin, path->SPDTState);
+	SPIIOEXP_SetPin(path->SP8TA2, (path->SP8TState >> 2) & 1);
+	SPIIOEXP_SetPin(path->SP8TA1, (path->SP8TState >> 1) & 1);
+	SPIIOEXP_SetPin(path->SP8TA0, path->SP8TState & 1);
+	SPIIOEXP_SetPin(path->SP8TEN, 0);
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN, 0);
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN2, 0);
+}
+
+
+//Resets all paths back to digital path
+void setAllDigital(){
+	SPIIOEXP_SetPin(&SPIPIN_SEL17, 0);//0 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL46, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL74, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL40, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL55, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL51, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL21, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL50, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL48, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL34, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL32, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL3, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL2, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL10, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL36, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_SEL35, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL6, 0);
+	SPIIOEXP_SetPin(&SPIPIN_SEL33, 1);//1 for digital
+	SPIIOEXP_SetPin(&SPIPIN_nMEN0, 1);
+	SPIIOEXP_SetPin(&SPIPIN_nMEN1, 1);
+	SPIIOEXP_SetPin(&SPIPIN_nMEN2, 1);
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN, 0);
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN2, 0);
+}
 
 /*/////////////////////////////////////////////////////////////////////////////
 
@@ -685,6 +941,24 @@ void TestMode1(){
 	//Set Status LEDs to indicate mode 1
 	IOEXP_SetPins(&IOEXP_SPDT, 0x000010, 1);
 
+	//Reset all switches to digital paths
+	setAllDigital();
+
+	const char *testInfo[] = {
+			"1) LED Test.\n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
+	}
+
+	//Nothing to run. Empty loop until escape is pressed
+	runTest(NULL);
+
+
 	// Test Mode 1 End
 	////////////////////////////////////////////////////////////////////
 }
@@ -692,30 +966,75 @@ void TestMode1(){
 void TestMode2(){
 	////////////////////////////////////////////////////////////////////
 	// Test Mode 2 Begin
-
-	// Set all pins to digital mode, and all pins will be input. DRC will cycle across all LEDs
-
-
-
-	//90 pin IO Init to Inputs
-	for (int i = 0; i < 90; i++){
-		pin_SetMode(pins[i], PIN_INPUT);
-	}
+	// Set all pins to digital mode, and all pins will be input. DRC Output states will be displayed on terminal
 
 	//Set all LEDs to indicate digital mode by setting as inputs
 	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 1);
-
-	//Set IO pins 62 and 63 to inputs.
-	IOEXP_SetModes(&IOEXP_SPDT, 0x00000C, 1);
-
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
 
 	//clear status LEDs
 	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
 
 	//Set Status LEDs to indicate mode 2
 	IOEXP_SetPins(&IOEXP_SPDT, 0x000020, 1);
+
+	//Reset all switches to digital paths
+	setAllDigital();
+
+	const char *testInfo[] = {
+			"2) DRC Digital Output Test.\n\r",
+			"The following shows the current output state of the DRC, as read by the interposer.\n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
+	}
+
+	//Set all Test board pins to Inputs to read data from DRC
+	for (int pinNum = 1; pinNum <= 90; pinNum++){
+
+		if(SPIPins[pinNum]->is90Pin == 1) {
+
+			SPIIOEXP_SetMode(SPIPins[pinNum], PIN_INPUT);
+
+		}
+
+	}
+
+	//Function to loop until escape is pressed
+	void TestFunc2(){
+
+		//Poll all IO expanders to read DRC outputs
+		SPIIOEXP_Poll(&SPIEXP0);
+		SPIIOEXP_Poll(&SPIEXP1);
+		SPIIOEXP_Poll(&SPIEXP2);
+		SPIIOEXP_Poll(&SPIEXP3);
+		SPIIOEXP_Poll(&SPIEXP4);
+		SPIIOEXP_Poll(&SPIEXP5);
+		SPIIOEXP_Poll(&SPIEXP6);
+
+		//display read pin state on serial terminal
+		for(int i = 0; i <90; i++){
+
+			//Skip iteration if current SPIPin doesn't represent a usable pin (Ex. PIN0 is a placeholder, PIN1 is GND)
+			if(SPIPins[i]->is90Pin != 1){
+			  continue;
+			}
+
+			//Get pin state from polled data
+			int pinstate = SPIIOEXP_getPinState(SPIPins[i]);
+
+			//display current pinState in terminal
+			displayPinState(i, pinstate);
+		}
+
+		HAL_Delay(50);
+
+	}
+
+	runTest(TestFunc2);
 
 	// Test Mode 2 End
 	////////////////////////////////////////////////////////////////////
@@ -727,19 +1046,8 @@ void TestMode3(){
 
 	// DRC Read IO Test. Test card will cyle all pins HIGH and LOW for DRC to capture.
 
-	//90 pin IO Init to Outputs
-	for (int i = 0; i < 90; i++){
-		pin_SetMode(pins[i], PIN_OUTPUT);
-	}
-
 	//Set all LEDs to indicate digital mode by setting as inputs
 	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 1);
-
-	//Set IO pins 62 and 63 to outputs.
-	IOEXP_SetModes(&IOEXP_SPDT, 0x00000C, 0);
-
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
 
 	//clear status LEDs
 	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
@@ -747,19 +1055,66 @@ void TestMode3(){
 	//Set Status LEDs to indicate mode 3
 	IOEXP_SetPins(&IOEXP_SPDT, 0x000030, 1);
 
-	//90 pin IO LOW to HIGH transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_SET);
-		HAL_Delay(200);
+	//Reset all switches to digital paths
+	setAllDigital();
+
+	const char *testInfo[] = {
+			"3) DRC Digital Input Test.\n\r",
+			"The following shows the current output state of the test board (this board), which will be sent to the DRC inputs.\n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
 	}
 
-	//90 pin IO HIGH to LOW transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_RESET);
-		HAL_Delay(200);
+	//90 pin IO Init to Outputs and display on terminal
+	for (int pinNum = 1; pinNum <= 90; pinNum++){
+
+		if(SPIPins[pinNum]->is90Pin == 1) {
+
+			SPIIOEXP_SetMode(SPIPins[pinNum], PIN_OUTPUT);
+			displayPinState(pinNum, 0);
+
+		}
+
 	}
 
+	//function to alternate between setting all interposer board pins high and all pins low
+	void testFunc3(){
 
+		//set all pins high
+		for(int pinNum = 1; pinNum <= 90 && keyPressed_byte != '\e'; pinNum++){
+
+			  if(SPIPins[pinNum]->is90Pin == 1) {
+
+				  SPIIOEXP_SetPin(SPIPins[pinNum], 1);
+
+				  displayPinState(pinNum, 1);
+
+				  HAL_Delay(50);
+
+			  }
+		}
+
+		//set all pins low
+		for(int pinNum = 1; pinNum <= 90 && keyPressed_byte != '\e'; pinNum++){
+
+			  if(SPIPins[pinNum]->is90Pin == 1) {
+
+				  SPIIOEXP_SetPin(SPIPins[pinNum], 0);
+
+				  displayPinState(pinNum, 0);
+
+				  HAL_Delay(50);
+
+			  }
+		}
+	}
+
+	runTest(testFunc3);
 
 	// Test Mode 3 End
 	////////////////////////////////////////////////////////////////////
@@ -772,6 +1127,12 @@ void TestMode4(){
 	// DRC LSDAC Triangle Wave Test. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DAC Mode
 
 
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 4
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000040, 1);
+
 	//Set all LEDs to indicate analog mode by setting as outputs
 	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
 
@@ -781,19 +1142,49 @@ void TestMode4(){
 	//Set all LEDs to indicate Analog ADC mode by setting as inputs. Pins 50 and 55 not connected to LS DACs
 	IOEXP_SetPins(&IOEXP_LED, 0x004001, LED_ADC_MODE);
 
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+	const char *testInfo[] = {
+			"Low Speed DAC Test.\n\r",
+			"The following shows which LSDAC and channel are connected to either J2 or J3 on the Interposer board.\n\r",
+			"The LSDAC and channel which are connected are to be observed on an oscilloscope.\n\n\r",
+			"=================================================\n\r",
+			"       J2              |            J3           \n\r",
+			"=================================================\n\r"
+	};
 
-	//clear status LEDs
-	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
 
-	//Set Status LEDs to indicate mode 4
-	IOEXP_SetPins(&IOEXP_SPDT, 0x000040, 1);
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
 
-	//90 pin IO HIGH to LOW transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_RESET);
 	}
+
+	//set path so that all SPDT switch switch into the analog path to avoid damage to pins
+	for(int LSChannel = 0; LSChannel < 16 && keyPressed_byte != '\e'; LSChannel++){
+		setPath(LSDACSequenceArray[LSChannel]);
+	}
+
+	//switch between LSDAC channels until escape is pressed
+	void testFunc4(){
+
+		//runTest() takes care of handling 'escape' input, but we check again here since each iteration takes >30 seconds
+		for(int LSChannel = 0; LSChannel < 16 && keyPressed_byte != '\e'; LSChannel++){
+
+			setPath(LSDACSequenceArray[LSChannel]);
+
+			if(LSChannel < 8){
+				displayLSDACConnections(LSChannel, 15);
+			}
+			else{
+				displayLSDACConnections(7, LSChannel);
+			}
+
+			HAL_Delay(2000);
+
+		}
+
+	}
+
+	runTest(testFunc4);
 
 	// Test Mode 4 End
 	////////////////////////////////////////////////////////////////////
@@ -803,31 +1194,8 @@ void TestMode5(){
 	////////////////////////////////////////////////////////////////////
 	// Test Mode 5 Begin
 
-	// LSDAC Fast Square Wave Test. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DAC Mode
-
-
-	//Set all LEDs to indicate analog mode by setting as outputs
-	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
-
-	//Set all LEDs to indicate Analog DAC mode by setting as inputs
-	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_DAC_MODE);
-
-	//Set all LEDs to indicate Analog ADC mode by setting as inputs. Pins 50 and 55 not connected to LS DACs
-	IOEXP_SetPins(&IOEXP_LED, 0x004001, LED_ADC_MODE);
-
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
-
-	//clear status LEDs
-	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
-
-	//Set Status LEDs to indicate mode 5
-	IOEXP_SetPins(&IOEXP_SPDT, 0x000050, 1);
-
-	//90 pin IO HIGH to LOW transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_RESET);
-	}
+	// LSDAC Fast Square Wave Test. This test is identical to Test Mode 4 as far as the STM32 board is concerned
+	TestMode4();
 
 	// Test Mode 5 End
 	////////////////////////////////////////////////////////////////////
@@ -849,19 +1217,125 @@ void TestMode6(){
 	//Set Pins 21, 17, 33, 2 for DAC mode
 	IOEXP_SetPins(&IOEXP_LED, 0xB10000, LED_DAC_MODE);
 
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
-
 	//clear status LEDs
 	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
 
 	//Set Status LEDs to indicate mode 6
 	IOEXP_SetPins(&IOEXP_SPDT, 0x000060, 1);
 
-	//90 pin IO HIGH to LOW transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_RESET);
+	const char *testInfo[] = {
+			"6) HS ADC/DAC loopback test for channel A.\n\r",
+			"The following shows which HSDAC and HSADC are connected (GREEN => Connected to Port)\n\r",
+			"Press keyboard buttons 0, 1, 2, 3 to select ADC/DAC pair\n\r",
+			"Inject a signal into the HSADC(J4) and observe HSDAC output(J2 or J3) on an oscilloscope.\n\n\r",
+			"========================================================\n\r",
+			"        J2        |        J3        |        J4        \n\r",
+			"========================================================\n\r",
+			"        NA        |   HSDAC0A(P21)   |   HSADC0A(P51)   \n\r",
+			"        NA        |   HSDAC1A(P17)   |   HSADC1A(P48)   \n\r",
+			"   HSDAC2A(P33)   |        NA        |   HSADC2A(P46)   \n\r",
+			"   HSDAC3A(P 2)   |        NA        |   HSADC3A(P50)   \n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
 	}
+
+	//set SP8T switches to connect DAC channel and ADC channel to either J2 or J3, or J4, respectively
+	void testFunc6(){
+
+		switch(keyPressed_byte){
+
+			case '0':
+				//connect HSDACA0(J3) and HSADC0(J4)
+				setPath(&J3_21);
+				setPath(&J4_51);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '0');
+
+				break;
+
+			case '1':
+				//connect HSDACA1(J3) and HSADC0(J4)
+				setPath(&J3_17);
+				setPath(&J4_48);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '1');
+
+				break;
+
+			case '2':
+				//connect HSDACA2(J2) and HSADC0(J4)
+				setPath(&J2_33);
+				setPath(&J4_46);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '2');
+
+				break;
+
+			case '3':
+				//connect HSDACA3(J2) and HSADC0(J4)
+				setPath(&J2_2);
+				setPath(&J4_50);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+				setTextColor(DEFAULT);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '3');
+
+				break;
+
+			default:
+				break;
+
+		}
+	}
+
+
+	runTest(testFunc6);
 
 	// Test Mode 6 End
 	////////////////////////////////////////////////////////////////////
@@ -880,11 +1354,8 @@ void TestMode7(){
 	//Set all LEDs to indicate ADC Mode
 	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_ADC_MODE);
 
-	//Set Pins 21, 17, 33, 2 for DAC mode
+	//Set Pins 32, 46, 48, 51 for DAC mode
 	IOEXP_SetPins(&IOEXP_LED, 0x40B000, LED_DAC_MODE);
-
-	//Set SPDT switches to analog mode.
-	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
 
 	//clear status LEDs
 	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
@@ -892,20 +1363,367 @@ void TestMode7(){
 	//Set Status LEDs to indicate mode 7
 	IOEXP_SetPins(&IOEXP_SPDT, 0x000070, 1);
 
-	//90 pin IO HIGH to LOW transition
-	for (int i = 0; i < 90; i++){
-		pin_Write(pins[i], GPIO_PIN_RESET);
+	const char *testInfo[] = {
+			"7) HS ADC/DAC loopback test for channel B.\n\r",
+			"The following shows which HSDAC and HSADC are connected (GREEN => Connected to Port)\n\r",
+			"Press keyboard buttons 0, 1, 2, 3 to select ADC/DAC pair\n\r",
+			"Inject a signal into the HSADC(J4) and observe HSDAC output(J2 or J3) on an oscilloscope.\n\n\r",
+			"========================================================\n\r",
+			"        J2        |        J3        |        J4        \n\r",
+			"========================================================\n\r",
+			"        NA        |   HSDAC0B(P51)   |   HSADC0B(P21)   \n\r",
+			"        NA        |   HSDAC1B(P48)   |   HSADC1B(P17)   \n\r",
+			"        NA        |   HSDAC2B(P46)   |   HSADC2B(P33)   \n\r",
+			"   HSDAC3B(P32)   |        NA        |   HSADC3B(P55)   \n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
 	}
+
+	//set SP8T switches to connect DAC channel and ADC channel to either J2 or J3, or J4, respectively
+	void testFunc7(){
+
+		switch(keyPressed_byte){
+
+			case '0':
+				//connect HSDACA0(J3) and HSADC0(J4)
+				setPath(&J3_51);
+				setPath(&J4_21);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '0');
+
+				break;
+
+			case '1':
+				//connect HSDACA1(J3) and HSADC0(J4)
+				setPath(&J3_48);
+				setPath(&J4_17);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '1');
+
+				break;
+
+			case '2':
+				//connect HSDACA2(J2) and HSADC0(J4)
+				setPath(&J3_46);
+				setPath(&J4_33);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '2');
+
+				break;
+
+			case '3':
+				//connect HSDACA3(J2) and HSADC0(J4)
+				setPath(&J2_32);
+				setPath(&J4_55);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+				setTextColor(DEFAULT);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '3');
+
+				break;
+
+			default:
+				break;
+
+		}
+	}
+
+
+	runTest(testFunc7);
+
 
 	// Test Mode 7 End
 	////////////////////////////////////////////////////////////////////
 }
 
+void TestMode8(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 8 Begin
+
+
+	//Set all LEDs to indicate analog mode by setting as outputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
+
+	//Set all LEDs to indicate ADC Mode
+	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_ADC_MODE);
+
+	//Set Pins 21, 17, 33, 2, 51, 48, 46, 32 for DAC mode
+	IOEXP_SetPins(&IOEXP_LED, 0xE1B000, LED_DAC_MODE);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 7
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000080, 1);
+
+	const char *testInfo[] = {
+			"8) HSDAC Output Test.\n\r",
+			"The following shows which HSDACs are connected (GREEN => Connected to Port)\n\r",
+			"Press keyboard buttons 0-7 to select a DAC pair. J2 and J3 allow up to 2 DAC outputs at once\n\r",
+			"Observe HSDAC output(J2 or J3) on an oscilloscope as you run through DRC Test Mode 8.\n\n\r",
+			"===========================================\n\r",
+			"Input#        J2        |        J3        \n\r",
+			"===========================================\n\r",
+			"  0                     |   HSDAC0A(P21)   \n\r",
+			"  1                     |   HSDAC1A(P17)   \n\r",
+			"  2      HSDAC2A(P33)   |                  \n\r",
+			"  3      HSDAC3A(P 2)   |                  \n\r",
+			"  4                     |   HSDAC0B(P51)   \n\r",
+			"  5                     |   HSDAC1B(P48)   \n\r",
+			"  6                     |   HSDAC2B(P46)   \n\r",
+			"  7      HSDAC3B(P32)   |                  \n\r"
+	};
+
+	//Print strings
+	for(int i = 0; i < (sizeof(testInfo) / sizeof(testInfo[0])); i++){
+
+		HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[i], strlen(testInfo[i]), 100);
+
+	}
+
+	//set SP8T switches to connect DAC channel and ADC channel to either J2 or J3, or J4, respectively
+	void testFunc7(){
+
+		switch(keyPressed_byte){
+
+			case '0':
+				//connect HSDACA0(J3)
+				setPath(&J3_21);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setCursorPosition(0, 17);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[11], strlen(testInfo[11]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[12], strlen(testInfo[12]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[13], strlen(testInfo[13]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '0');
+
+				break;
+
+			case '1':
+				//connect HSDACA1(J3)
+				setPath(&J3_17);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(DEFAULT);
+				setCursorPosition(0, 17);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[11], strlen(testInfo[11]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[12], strlen(testInfo[12]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[13], strlen(testInfo[13]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '1');
+
+				break;
+
+			case '2':
+				//connect HSDACA2(J2)
+				setPath(&J2_33);
+
+				//update display
+				setCursorPosition(0, 15);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+				setCursorPosition(0, 20);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[14], strlen(testInfo[14]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '2');
+
+				break;
+
+			case '3':
+				//connect HSDACA3(J2)
+				setPath(&J2_2);
+
+				//update display
+				setCursorPosition(0, 15);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+				setTextColor(DEFAULT);
+				setCursorPosition(0, 20);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[14], strlen(testInfo[14]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '3');
+
+				break;
+
+			case '4':
+				//connect HSDACB0(J3)
+				setPath(&J3_51);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setTextColor(GREEN);
+				setCursorPosition(0, 17);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[11], strlen(testInfo[11]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[12], strlen(testInfo[12]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[13], strlen(testInfo[13]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '4');
+
+				break;
+
+			case '5':
+				//connect HSDACB1(J3)
+				setPath(&J3_48);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setCursorPosition(0, 17);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[11], strlen(testInfo[11]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[12], strlen(testInfo[12]), 100);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[13], strlen(testInfo[13]), 100);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '5');
+
+				break;
+
+			case '6':
+				//connect HSDACB2(J3)
+				setPath(&J3_46);
+
+				//update display
+				setCursorPosition(0, 13);
+				setTextColor(DEFAULT);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[7], strlen(testInfo[7]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[8], strlen(testInfo[8]), 100);
+				setCursorPosition(0, 17);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[11], strlen(testInfo[11]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[12], strlen(testInfo[12]), 100);
+				setTextColor(GREEN);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[13], strlen(testInfo[13]), 100);
+				setTextColor(DEFAULT);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '6');
+
+				break;
+
+			case '7':
+				//connect HSDACB3(J2)
+				setPath(&J2_32);
+
+				//update display
+				setCursorPosition(0, 15);
+				setTextColor(DEFAULT);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[9], strlen(testInfo[9]), 100);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[10], strlen(testInfo[10]), 100);
+				setTextColor(GREEN);
+				setCursorPosition(0, 20);
+				HAL_UART_Transmit(&huart1, (uint8_t *)testInfo[14], strlen(testInfo[14]), 100);
+				setTextColor(DEFAULT);
+
+				//nothing needs to be done while no key is being pressed
+				while(keyPressed_byte == '7');
+
+				break;
+
+			default:
+				break;
+
+		}
+	}
+
+
+	runTest(testFunc7);
+
+	// Test Mode 8 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void (*testModes[])(void) = {
+	TestMode1,
+	TestMode2,
+	TestMode3,
+	TestMode4,
+	TestMode5,
+	TestMode6,
+	TestMode7,
+	TestMode8
+};
+
 /*/////////////////////////////////////////////////////////////////////////////
 
-Test Mode functions Begin
+Test Mode functions End
 
 *//////////////////////////////////////////////////////////////////////////////
+
+
 
 
 
@@ -1011,26 +1829,8 @@ Error_Handler();
   SPIIOEXP_WritePins(&SPIEXP5, 0xFFFF, 0x0000);
   SPIIOEXP_WritePins(&SPIEXP6, 0xFFFF, 0x0000);
 
-  SPIIOEXP_SetPin(&SPIPIN_SEL17, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL46, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL74, 1);//1 for digital
-  SPIIOEXP_SetPin(&SPIPIN_SEL40, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL55, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL51, 1);//1 for digital
-  SPIIOEXP_SetPin(&SPIPIN_SEL21, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL50, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL48, 1);//1 for digital
-  SPIIOEXP_SetPin(&SPIPIN_SEL34, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL32, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL3, 1);//1 for digital
-  SPIIOEXP_SetPin(&SPIPIN_SEL2, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL10, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL36, 1);//1 for digital
-  SPIIOEXP_SetPin(&SPIPIN_SEL35, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL6, 0);
-  SPIIOEXP_SetPin(&SPIPIN_SEL33, 1);//1 for digital
-
-
+  //default all paths to digital mode.
+  setAllDigital();
 
 
   /*
@@ -1093,152 +1893,76 @@ Error_Handler();
   SPIIOEXP_SetPin(&SPIPIN_nMEN2, 0);
 
 
-
-  //Write test to DRC
-  int i = 0;
-  int on = 0;
-  while(0){
-  while(on == 0){
-	  if(i == 90){
-		  on = 1;
-		  i%=90;
-	  }
-	  if(SPIPins[i]->is90Pin != 1) {
-		  i++;
-		  continue;
-	  }
-	  SPIIOEXP_SetPin(SPIPins[i], 1);
-	  HAL_Delay(3);
-	  i++;
-  }
-  while(on == 1){
-	  if(i == 90){
-		  on = 0;
-		  i%=90;
-	  }
-	  if(SPIPins[i]->is90Pin != 1) {
-		  i++;
-		  continue;
-	  }
-	  SPIIOEXP_SetPin(SPIPins[i], 0);
-	  HAL_Delay(3);
-	  i++;
-  }
-  }
-
-  //Read Test from DRC
-  i = 0;
-  while(i < 90){
-	  if(SPIPins[i]->is90Pin != 1) {
-		  i++;
-		  continue;
-	  }
-	  SPIIOEXP_SetMode(SPIPins[i], 1);
-	  i++;
-  }
-
-
-
-  char transmitMsg[20];
-  sprintf(transmitMsg, "\033[2J\033[H");
-  HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-  while(1){
-	  SPIIOEXP_Poll(&SPIEXP0);
-	  SPIIOEXP_Poll(&SPIEXP1);
-	  SPIIOEXP_Poll(&SPIEXP2);
-	  SPIIOEXP_Poll(&SPIEXP3);
-	  SPIIOEXP_Poll(&SPIEXP4);
-	  SPIIOEXP_Poll(&SPIEXP5);
-	  SPIIOEXP_Poll(&SPIEXP6);
-
-	  for(i = 0; i <90; i++){
-		  if(SPIPins[i]->is90Pin != 1){
-			  continue;
-		  }
-		  int pinstate = SPIIOEXP_getPinState(SPIPins[i]);
-
-		  sprintf(transmitMsg, "\033[%d;%dH", i%30 + 1, 30 * (i/30));
-
-		  HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-
-		  sprintf(transmitMsg, "Pin %d: %d\n", i, pinstate);
-
-		  HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-	  }
-  }
-
-
-  //while(1);
-  //90 pin connector IO initialization (
-//  for (int i = 0; i < 90; i++){
-//	  pin_Init(pins[i]);
-//	  pin_SetMode(pins[i], PIN_OUTPUT);
-//	  pin_Write(pins[i], GPIO_PIN_RESET);
-//  }
-
-
-
+  HAL_UART_Receive_IT(&huart1, &keyPressed_byte, 1);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-	  int modeCount = 0;
-	  pin_SetMode(&PIN88, PIN_INPUT);
-	  pin_SetMode(&PIN89, PIN_INPUT);
-	  while(!pin_Read(&PIN89)){
-		  while(!pin_Read(&PIN88)){
-			  if(pin_Read(&PIN89)){
-				  goto endCount;
-			  }
-		  }
-		  while(pin_Read(&PIN88)){}
-		  modeCount++;
-	  }
-	  endCount:
+  while(1){
+	////////////////////////////////////////////////////////////////////
+	// Test Procedure Begin
+	////////////////////////////////////////////////////////////////////
 
-	  switch(modeCount){
-	  case 0:
-		  break;
-	  case 1:
-		  TestMode1();
-		  break;
-	  case 2:
-		  TestMode2();
-		  break;
-	  case 3:
-		  TestMode3();
-		  break;
-	  case 4:
-		  TestMode4();
-		  break;
-	  case 5:
-		  TestMode5();
-		  break;
-	  case 6:
-		  TestMode6();
-		  break;
-	  case 7:
-		  TestMode7();
-		  break;
-	  default:
-		  break;
-	  }
-	  //printf("Wrong parameters value: file ");
-//	  for(int i = 0; i < 90; i++){
-//		  pin_Write(pins[i], GPIO_PIN_SET);
-//		  HAL_Delay(100);
-//	  }
-//	  for(int i = 0; i < 90; i++){
-//		  pin_Write(pins[i], GPIO_PIN_RESET);
-//		  HAL_Delay(100);
-//	  }
+	//clear terminal screen
+	clearTerminal();
+
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN, 1);
+	//SPIIOEXP_SetPin(&SPIPIN_SPDTEN2, 1);
+
+	//default terminal text color
+	setTextColor(DEFAULT);
+
+	const char *menuItems[] = {
+			"DRC Rev. 2.0 Device Verification Test.\n\r",
+			"Device: STM32H755ZIT6 Test Board.\n\r",
+			"Press escape to return to menu from any test.\n\n\r",
+			"Please Select a Test.\n\r",
+			"1) LED Test.\n\r",
+			"2) Digital Output Test.\n\r",
+			"3) Digital Input Test.\n\r",
+			"4) Low Speed DAC Ramp.\n\r",
+			"5) Low Speed DAC Square Wave.\n\r",
+			"6) High Speed ADC/DAC Loopback Mode A.\n\r",
+			"7) High Speed ADC/DAC Loopback Mode B.\n\r",
+			"8) High Speed DAC output mode. Tests High speed DAC to FPGA communication bus.\n\r"
+	};
+
+	//Print menu out
+	for(int i = 0; i < (sizeof(menuItems) / sizeof(menuItems[0])); i++){
+		HAL_UART_Transmit(&huart1, (uint8_t *)menuItems[i], strlen(menuItems[i]), 100);
+	}
+
+	// Print out testing options
+	char transmitMsg[] = "Select Option: ";
+
+	HAL_UART_Transmit(&huart1, (uint8_t *)transmitMsg, strlen(transmitMsg), 100);
+
+	//while invalid data is presented, do nothing
+	while(keyPressed_byte < '1' || keyPressed_byte > '8');
+
+	//convert user input into int
+	int readValue = keyPressed_byte - '0';
+
+	//clear terminal screen
+	clearTerminal();
+
+	//display header on top of test
+	displayHeader();
+
+	//reset global input variable
+	keyPressed_byte = 0;
+
+	//verify the integer value itself is valid
+	if(readValue < 1 || readValue > 8) continue;
+
+	//run test mode of user specified input
+	testModes[readValue - 1]();
+
+  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
   /* USER CODE END 3 */
 }
 

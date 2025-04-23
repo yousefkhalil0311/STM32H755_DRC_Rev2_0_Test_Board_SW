@@ -1,46 +1,17 @@
-16:21:50 **** Incremental Build of configuration Debug for project DRC_Rev2_0_DVT_Interposer_Controller_CM7 ****
+00:18:31 **** Incremental Build of configuration Debug for project DRC_Rev2_0_DVT_Interposer_Controller_CM7 ****
 make -j32 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DDEBUG -DCORE_CM7 -DUSE_HAL_DRIVER -DSTM32H755xx -DUSE_PWR_LDO_SUPPLY -c -I../Core/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc -I../../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:1144:30: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
- 1144 |   HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-      |                              ^~~~~~~~~~~
-      |                              |
-      |                              char *
-In file included from ../Core/Inc/stm32h7xx_hal_conf.h:462,
-                 from ../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:29,
-                 from ../Core/Inc/main.h:30,
-                 from ../Core/Src/main.c:20:
-../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:1636:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1636 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:1162:46: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
- 1162 |                   HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-      |                                              ^~~~~~~~~~~
-      |                                              |
-      |                                              char *
-../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:1636:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1636 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
-../Core/Src/main.c:1166:46: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
- 1166 |                   HAL_UART_Transmit(&huart1, transmitMsg, strlen(transmitMsg), 100);
-      |                                              ^~~~~~~~~~~
-      |                                              |
-      |                                              char *
-../../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:1636:79: note: expected 'const uint8_t *' {aka 'const unsigned char *'} but argument is of type 'char *'
- 1636 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
-      |                                                                ~~~~~~~~~~~~~~~^~~~~
 arm-none-eabi-gcc -o "DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\youse\STM32CubeIDE\workspace_1.18.0\DRC_Workspace\DRC_Rev2_0_DVT_Interposer_Controller\CM7\STM32H755ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="DRC_Rev2_0_DVT_Interposer_Controller_CM7.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf
  
 arm-none-eabi-size  DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf 
 arm-none-eabi-objdump -h -S DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf  > "DRC_Rev2_0_DVT_Interposer_Controller_CM7.list"
    text	   data	    bss	    dec	    hex	filename
-  55528	   2192	   9656	  67376	  10730	DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf
+  72832	   3152	   9656	  85640	  14e88	DRC_Rev2_0_DVT_Interposer_Controller_CM7.elf
 Finished building: default.size.stdout
  
 Finished building: DRC_Rev2_0_DVT_Interposer_Controller_CM7.list
  
 
-16:21:51 Build Finished. 0 errors, 3 warnings. (took 1s.201ms)
+00:18:33 Build Finished. 0 errors, 0 warnings. (took 2s.395ms)
 

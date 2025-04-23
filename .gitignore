@@ -19,12 +19,12 @@
 #ignore CM4 metadata
 /DRC_Rev2_0_DVT_Interposer_Controller/CM4/.settings/
 /DRC_Rev2_0_DVT_Interposer_Controller/CM4/.cproject/
-DRC_Rev2_0_DVT_Interposer_Controller/CM4/.project
+/DRC_Rev2_0_DVT_Interposer_Controller/CM4/.project
 
 #ignore CM7 metadata
 /DRC_Rev2_0_DVT_Interposer_Controller/CM7/.settings/
 /DRC_Rev2_0_DVT_Interposer_Controller/CM7/.cproject/
-DRC_Rev2_0_DVT_Interposer_Controller/CM7/.project
+/DRC_Rev2_0_DVT_Interposer_Controller/CM7/.project
 
 # STM32CubeMX backup files
 *.bak

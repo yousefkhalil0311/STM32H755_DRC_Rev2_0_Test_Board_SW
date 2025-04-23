@@ -1,0 +1,240 @@
+/*/////////////////////////////////////////////////////////////////////////////
+
+Test Mode functions Begin
+
+*//////////////////////////////////////////////////////////////////////////////
+
+
+void TestMode1(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 1 Begin
+
+	// Edge mounted LEDs on DRC will cycle. No need to do anything.
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 1
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000010, 1);
+
+	// Test Mode 1 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode2(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 2 Begin
+
+	// Set all pins to digital mode, and all pins will be input. DRC will cycle across all LEDs
+
+
+
+	//90 pin IO Init to Inputs
+	for (int i = 0; i < 90; i++){
+		pin_SetMode(pins[i], PIN_INPUT);
+	}
+
+	//Set all LEDs to indicate digital mode by setting as inputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 1);
+
+	//Set IO pins 62 and 63 to inputs.
+	IOEXP_SetModes(&IOEXP_SPDT, 0x00000C, 1);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 2
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000020, 1);
+
+	// Test Mode 2 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode3(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 3 Begin
+
+	// DRC Read IO Test. Test card will cyle all pins HIGH and LOW for DRC to capture.
+
+	//90 pin IO Init to Outputs
+	for (int i = 0; i < 90; i++){
+		pin_SetMode(pins[i], PIN_OUTPUT);
+	}
+
+	//Set all LEDs to indicate digital mode by setting as inputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 1);
+
+	//Set IO pins 62 and 63 to outputs.
+	IOEXP_SetModes(&IOEXP_SPDT, 0x00000C, 0);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 3
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000030, 1);
+
+	//90 pin IO LOW to HIGH transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_SET);
+		HAL_Delay(200);
+	}
+
+	//90 pin IO HIGH to LOW transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_RESET);
+		HAL_Delay(200);
+	}
+
+
+
+	// Test Mode 3 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode4(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 4 Begin
+
+	// DRC LSDAC Triangle Wave Test. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DAC Mode
+
+
+	//Set all LEDs to indicate analog mode by setting as outputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
+
+	//Set all LEDs to indicate Analog DAC mode by setting as 0
+	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_DAC_MODE);
+
+	//Set all LEDs to indicate Analog ADC mode by setting as inputs. Pins 50 and 55 not connected to LS DACs
+	IOEXP_SetPins(&IOEXP_LED, 0x004001, LED_ADC_MODE);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 4
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000040, 1);
+
+	//90 pin IO HIGH to LOW transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_RESET);
+	}
+
+	// Test Mode 4 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode5(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 5 Begin
+
+	// LSDAC Fast Square Wave Test. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DAC Mode
+
+
+	//Set all LEDs to indicate analog mode by setting as outputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
+
+	//Set all LEDs to indicate Analog DAC mode by setting as inputs
+	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_DAC_MODE);
+
+	//Set all LEDs to indicate Analog ADC mode by setting as inputs. Pins 50 and 55 not connected to LS DACs
+	IOEXP_SetPins(&IOEXP_LED, 0x004001, LED_ADC_MODE);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 5
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000050, 1);
+
+	//90 pin IO HIGH to LOW transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_RESET);
+	}
+
+	// Test Mode 5 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode6(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 6 Begin
+
+	// HS ADC/DAC loopback test for channel A. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DRC ADC/DAC Mode
+
+
+	//Set all LEDs to indicate analog mode by setting as outputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
+
+	//Set all LEDs to indicate ADC Mode
+	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_ADC_MODE);
+
+	//Set Pins 21, 17, 33, 2 for DAC mode
+	IOEXP_SetPins(&IOEXP_LED, 0xB10000, LED_DAC_MODE);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 6
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000060, 1);
+
+	//90 pin IO HIGH to LOW transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_RESET);
+	}
+
+	// Test Mode 6 End
+	////////////////////////////////////////////////////////////////////
+}
+
+void TestMode7(){
+	////////////////////////////////////////////////////////////////////
+	// Test Mode 7 Begin
+
+	// HS ADC/DAC loopback test for channel B. Test Board will set all SPDT switches to analog mode and SPDT LEDs to DRC ADC/DAC Mode
+
+
+	//Set all LEDs to indicate analog mode by setting as outputs
+	IOEXP_SetModes(&IOEXP_LED, 0xFFFF03, 0);
+
+	//Set all LEDs to indicate ADC Mode
+	IOEXP_SetPins(&IOEXP_LED, 0xFFFF03, LED_ADC_MODE);
+
+	//Set Pins 21, 17, 33, 2 for DAC mode
+	IOEXP_SetPins(&IOEXP_LED, 0x40B000, LED_DAC_MODE);
+
+	//Set SPDT switches to analog mode.
+	IOEXP_SetPins(&IOEXP_SPDT, 0xFFFF03, 0);
+
+	//clear status LEDs
+	IOEXP_SetPins(&IOEXP_SPDT, 0x0000F0, 0);
+
+	//Set Status LEDs to indicate mode 7
+	IOEXP_SetPins(&IOEXP_SPDT, 0x000070, 1);
+
+	//90 pin IO HIGH to LOW transition
+	for (int i = 0; i < 90; i++){
+		pin_Write(pins[i], GPIO_PIN_RESET);
+	}
+
+	// Test Mode 7 End
+	////////////////////////////////////////////////////////////////////
+}
+
+/*/////////////////////////////////////////////////////////////////////////////
+
+Test Mode functions End
+
+*//////////////////////////////////////////////////////////////////////////////
